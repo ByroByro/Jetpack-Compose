@@ -65,7 +65,7 @@ fun MyApp() {
             }
             
             if(moneyCounter.value > 25){
-                Text(text = "Lots of money!")
+                Text(text = "Lots of money yey!")
             }
         }
     }
