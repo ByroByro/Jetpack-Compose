@@ -12,12 +12,15 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import zw.co.byrosolutions.introtocompose.ui.theme.IntroToComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -34,6 +37,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyApp() {
+
+    var moneyCounter = remember {
+        mutableStateOf(0)
+    }
+
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -44,21 +52,34 @@ fun MyApp() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Hello")
-            CreateCircle()
+            Text(
+                text = "$${moneyCounter.value}", style = TextStyle(
+                    color = Color.White,
+                    fontSize = 35.sp,
+                    fontWeight = FontWeight.ExtraBold
+                )
+            )
+            Spacer(modifier = Modifier.height(130.dp))
+            CreateCircle(moneyCounter = moneyCounter.value) { newValue ->
+                moneyCounter.value = newValue
+            }
+            
+            if(moneyCounter.value > 25){
+                Text(text = "Lots of money!")
+            }
         }
     }
 }
 
-@Preview
 @Composable
-fun CreateCircle() {
+fun CreateCircle(moneyCounter: Int = 0, updateMoneyCounter: (Int) -> Unit) {
+
     Card(
         modifier = Modifier
             .padding(5.dp)
             .size(105.dp)
             .clickable {
-                Log.d("Tap", "CreateCircle: Tap")
+                updateMoneyCounter(moneyCounter + 1)
             }, shape = CircleShape, elevation = 5.dp
     ) {
         Box(contentAlignment = Alignment.Center) {
