@@ -8,9 +8,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import zw.co.byrosolutions.noteapp.data.NotesDataSource
+import zw.co.byrosolutions.noteapp.model.Note
 import zw.co.byrosolutions.noteapp.screen.NoteScreen
 import zw.co.byrosolutions.noteapp.ui.theme.NoteAppTheme
 
@@ -19,13 +23,21 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NoteAppTheme {
+
+                val notes = remember {
+                    mutableStateListOf<Note>()
+                }
+
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                     // color = Color.White
                 ) {
-                    NoteScreen()
+                    NoteScreen(
+                        notes = notes,
+                        onAddNote = { notes.add(it) },
+                        onRemoveNote = { notes.remove(it) })
                 }
             }
         }

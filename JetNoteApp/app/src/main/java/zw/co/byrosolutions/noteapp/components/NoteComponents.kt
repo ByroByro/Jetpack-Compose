@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
+import java.text.SimpleDateFormat
+import java.util.*
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -54,4 +56,14 @@ fun NoteButton(
     Button(onClick = onClick, shape = CircleShape, enabled = enabled, modifier = modifier) {
         Text(text = text)
     }
+}
+
+fun dateNow(): String {
+    val sdf = SimpleDateFormat("dd-MM-yyyy")
+
+    // on below line we are creating a variable for
+    // current date and time and calling a simple
+    // date format in it.
+
+    return sdf.format(Date())
 }
