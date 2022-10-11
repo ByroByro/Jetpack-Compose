@@ -15,12 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 import zw.co.byrosolutions.noteapp.data.NotesDataSource
 import zw.co.byrosolutions.noteapp.model.Note
 import zw.co.byrosolutions.noteapp.screen.NoteScreen
 import zw.co.byrosolutions.noteapp.screen.NoteViewModel
 import zw.co.byrosolutions.noteapp.ui.theme.NoteAppTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
